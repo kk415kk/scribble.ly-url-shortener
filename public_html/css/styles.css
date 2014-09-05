@@ -11,17 +11,20 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', 'Raleway', 'Ubuntu', sans-serif;
 }
+
+h1 {
+  font-size: 30px;
+}
 /** Text END **/
 
 /** Banners **/
 .banner {
   border-top: solid 4px #127872;
-  padding-top: 5px;
-  padding-bottom: 10px;
+  padding: 5px 25px 10px 25px;
+  margin: -8px 0 5px -8px;
   background-color: #0e6471;
   width: 100%;
   color: #ffffff;
-  margin-bottom: 5px;
 }
 
 
