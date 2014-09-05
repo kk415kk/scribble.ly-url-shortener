@@ -12,16 +12,48 @@
     <!-- FONTS END -->
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
     <!-- STYLES END -->
 
     <!-- SCRIPTS -->
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <!-- SCRIPTS END -->
   </head>
 
   <body>
 
     <!-- Navbar -->
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href=""></a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a class="navbar-button" href="index.html">About Me</a></li>
+            <li><a class="navbar-button" href="html/resume.html">Resume</a></li>
+            <li class="dropdown">
+              <a class="navbar-button dropdown-toggle" id="dropdown-menu" data-toggle="dropdown">
+                Projects
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-menu">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Placeholder #</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
     <!-- Navbar END -->
 
     <div class="banner adjust">
