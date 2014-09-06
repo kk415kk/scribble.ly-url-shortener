@@ -1,0 +1,3 @@
+I have a decent amount of experience with web architecture through school, personal projects, and my outside work experience. I've developed a few websites using a combination of HTML, CSS, and JavaScript for front-end work and numerous frameworks including Node.js, Ruby on Rails, Sails.js, and Flask for backend infrastructure.
+
+I mostly only use Google Chrome these days; my favorite features from Chrome includes the syncing feature for bookmarks, etc through my Google account as well as the developer's console in Chrome. Alternatively, I also like using the dev console in Firefox as well as the Greasemonkey plugin for running scripts.
