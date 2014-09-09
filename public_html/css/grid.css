@@ -4,6 +4,11 @@
   clear: both;
 }
 
+.row {
+  padding: 5px 0;
+  clear: both;
+}
+
 .left-grid {
   float: left;
   width: 50%;

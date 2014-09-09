@@ -13,6 +13,7 @@
 
     <!-- STYLES -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cascade.css">
     <link rel="stylesheet" href="css/grid.css">
     <!-- STYLES END -->
 
@@ -20,23 +21,30 @@
 
   <body>
 
-    <div class="banner">
-      <h1>About Me</h1>
+    <div id="banner">
+      <div class="container">
+        <h1><a href="index.html">Kevin Kao's Spectacular Homepage</a></h1>
+      </div>
     </div>
 
     <div class="container">
-      <div class="left-grid">
-        <h2>Meet Kevin Kao</h2>
-        <img src="extra_credit/assets/images/profile_pic.jpg" alt="Kevin" class="picture-border">
-        <br><br>
-        <p>This is me!</p>
-      </div>
+      <div class="row">
+        <div class="left-grid">
+          <div class="box-empty">
+            <h2>Meet Kevin Kao!</h2>
+            <img src="extra_credit/assets/images/profile_pic.jpg" alt="Kevin" class="picture-border">
+            <br><br>
+            <p>This is me! I'm a third year undergraduate EECS major at University of California, Berkeley.</p>
+          </div>
+        </div>
 
-      <div class="right-grid">
-        <h3>Skills</h3>
-        <p>Some of my skills are listed here.</p>
-        <ul>
-          <li>Programming Languages:
+        <div class="right-grid">
+          <div class="box-header">
+            <h2>Background</h2>
+          </div>
+          <div class="box-body">
+            <p>My skills are listed here.</p>
+            <h3>Programming Languages</h3>
             <ul>
               <li>Java</li>
               <li>Python</li>
@@ -45,8 +53,8 @@
               <li>C, C++</li>
               <li>SQL</li>
             </ul>
-          </li>
-          <li>Frameworks, Libraries, Tools, Platforms:
+            <h3>Frameworks, Libraries, Tools, Platforms</h3>
+            <p>This is a subset of the tools I've used in the past.</p>
             <ul>
               <li>Ubuntu, Windows</li>
               <li>Node.js, Flask, Rails</li>
@@ -54,8 +62,13 @@
               <li>MySQL, Redis, HBase</li>
               <li>Hadoop</li>
             </ul>
-          </li>
-        </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <h4>Hobbies</h4>
+        <p>I like huskies. :-)</p> 
       </div>
     </div>
 
