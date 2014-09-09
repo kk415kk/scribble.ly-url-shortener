@@ -1,0 +1,87 @@
+/** 
+ * Created by Kevin Kao 
+ **/
+
+/** Text **/
+body {
+  font-family: 'Raleway', 'Ubuntu', sans-serif;
+  color: #696969;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+
+}
+
+a:visited {
+  color: #428bca;
+}
+
+h1 a:visited {
+  color: white;
+}
+
+h1 a:hover {
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Raleway', 'Ubuntu', sans-serif;
+}
+
+h1 {
+  font-size: 30px;
+}
+/** Text END **/
+
+/** Banners **/
+#banner {
+  border-top: solid 6px #127872;
+  border-bottom: solid 6px #127872;
+  padding: 5px 25px 10px 25px;
+  margin: -8px 0 5px -8px;
+  background-color: #0e6471;
+  width: 100%;
+  color: #000000;
+}
+
+
+/** Banners END **/
+
+
+/** Boxes & Borders **/
+.picture-border {
+  border: 4px #d3d3d3 solid;
+}
+
+.box-header {
+  background-color: #127872;
+  height: 75px;
+}
+
+.box-body {
+  background-color: #0e6471;
+  height: 425px;
+}
+
+.box-empty {
+  border: 5px #0e6471 solid;
+  padding: 5px 25px;
+  height: 501px;
+}
+
+.box-header, .box-body {
+  padding: 5px 25px;
+  color: white;
+}
+
+/** Boxes & Borders END **/

@@ -1,0 +1,46 @@
+/** 
+ * Created by Kevin Kao 
+ * Overwrites latest Bootstrap version
+ **/
+
+/** Text **/
+body {
+  font-family: 'Raleway', 'Ubuntu', sans-serif;
+  color: #696969;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Raleway', 'Ubuntu', sans-serif;
+}
+/** Text END **/
+
+/** Dropdown **/
+.dropdown-menu {
+ border-radius: 0;
+}
+/** Dropdown END **/
+
+/** Banners **/
+.adjust {
+  margin-top: -20px;
+}
+
+.banner {
+  border-top: solid 4px #127872;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  background-color: #0e6471;
+  width: 100%;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+
+/** Banners END **/
+
+
+/** Images **/
+.picture-border {
+  border: 4px #d3d3d3 solid;
+}
+/** Images END **/
