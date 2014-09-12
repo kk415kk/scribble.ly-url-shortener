@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>Credit Card Validator</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <h1>Credit Card Validator</h1>
+    <div id="flashMessage">
+      Waiting for input...
+    </div>
+    <form name="cc-form" onsubmit="return false">
+      <p>Credit card numbers will be validated based on the Luhn algorithm.</p>
+      <label>Credit Card Number: </label><br>
+      <input type="text" name="ccNumber" placeholder="xxxx-xxxx-xxxx-xxxx">
+
+      <br>
+      <input type="button" onclick="validateCard()" value="Validate">
+    </form>
+
+    <script>
+      function validateCard() {
+        var form = document.forms["cc-form"],
+            ccNum = form["ccNumber"].value,
+            CC_LENGTH = 16;
+
+        if (!ccNum) {
+          // flash message
+          return error(ccNum);
+        } else {
+          // verify message
+          var digits = ccNum.split("-").join("").split(""),
+              oddSum = 0;
+              evenSum = 0;
+          digits.reverse();
+          for (var i = 0; i < digits.length; i++) {
+            if (isNaN(parseInt(digits[i]))) return error(ccNum);
+
+            digits[i] = parseInt(digits[i]);
+            if (i%2 == 0) {
+              oddSum += digits[i];
+            } else {
+              digits[i] = digits[i]*2;
+              var tempSum = digits[i].toString().split("").reduce(function (total, curr) { return total + parseInt(curr) }, 0);
+              evenSum += tempSum;
+            }
+          }
+
+          if ((oddSum + evenSum) % 10 == 0) {
+            return success(ccNum);
+          } else {
+            return error(ccNum);
+          }
+        }
+      }
+
+      function error(ccNum) {
+        document.getElementById("flashMessage").innerHTML = ccNum + " is an <b>invalid</b> credit card number according to the Luhn algorithm.";
+        return false;
+      }
+
+      function success(ccNum) {
+        document.getElementById("flashMessage").innerHTML = ccNum + " is a <b>valid</b> credit card number according to the Luhn algorithm.";
+        return true;
+      }
+    </script>
+  </body>
+</html>
