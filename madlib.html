@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <title>Kevin's Mad Libs</title>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <h1>Madlib Form</h1>
+    <div id="flashMessage">
+    </div>
+
+    <form id="madlib-form" onsubmit="process();">
+      <label>Type of Animal: </label><input type="text" name="animal" placeholder="siberian husky"><br>
+      <br>
+      <label>Favorite Number: </label><input type="number" name="number" placeholder="0"><br>
+      <br>
+
+      <label>Favorite Color:</label><br>
+      <input type="radio" name="color" value="red" checked>Red<br>
+      <input type="radio" name="color" value="yellow">Yellow<br>
+      <input type="radio" name="color" value="orange">Orange<br>
+      <input type="radio" name="color" value="green">Green<br>
+      <input type="radio" name="color" value="blue">Blue<br>
+      <br>
+
+      <label>Favorite Transportation</label>
+      <br>
+      <input type="checkbox" name="transportation" value="bike">Bike<br>
+      <input type="checkbox" name="transportation" value="car">Car<br>
+      <input type="checkbox" name="transportation" value="bus">Bus<br>
+      <input type="checkbox" name="transportation" value="train">Train<br>
+      <input type="checkbox" name="transportation" value="plane">Plane<br>
+
+      <label>Favorite Food:</label>
+      <select name="food">
+        <option value="sushi">Sushi</option>
+        <option value="apple">Apple</option>
+        <option value="pizza">Pizza</option>
+        <option value="ramen">Ramen</option>
+        <option value="chow-mein">Chow Mein</option>
+      </select>
+      
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+
+    <br>
+    <div id="#mad-lib">
+    </div>
+
+    <hr>
+
+    <footer class="footer">
+      <div>
+        Extra Credit: <a href="extra_credit/credit_card.html">Credit Card Validator</a>, based on Luhn's algorithm
+      </div>
+    </footer>
+
+    <script>
+      $("#madlib-form").submit(function(event) {
+        event.preventDefault();
+        var values = $(this).serialize().split("&");
+        var form_fields = {};
+
+        for (var i = 0; i < values.length; i++) {
+          key_val_pair = values[i].split("=");
+          field = key_val_pair[0];
+          value = key_val_pair[1].replace("+", " ");
+
+          if (field == 'transportation') {
+            if (!(field in form_fields)) {
+              form_fields[field] = [];
+            }
+            form_fields[field].push(value);
+          } else {
+            form_fields[field] = value;
+          }
+        }
+
+        var errors = 0;
+        errors += verifyStr(form_fields['animal']);
+        errors += verifyNum(form_fields['number']);
+        errors += verifyStr(form_fields['color']);
+        errors += verifyStr(form_fields['food']);
+        
+        if (!('transportation' in form_fields)) {
+          errors += 1;
+        } else {
+          errors += verifyList(form_fields['transportation']);
+        }
+
+        if (errors != 0) {
+          displayErr();
+          return false;
+        } else {
+          insertHTML(form_fields);
+          return true;
+        }
+      });
+
+      function verifyList(list) {
+        var errors = 0;
+        for (var i = 0; i < list.length; i++) {
+          errors += verifyStr(list[i]);
+        }
+        return errors;
+      }
+
+      function verifyStr(str) {
+        return str && typeof str == 'string' ? 0 : 1;
+      }
+
+      function verifyNum(num) {
+        return num && !isNaN(parseInt(num)) ? 0 : 1;
+      }
+
+      function insertHTML(fields) {
+        html = ""
+        html += "<h2>Madlib</h2>"
+        html += "<p>There once was a mad lib created by a <u>" + fields['animal'] + "</u> named Kevin. ";
+        html += "His <u>" + fields['color'] + "</u> keyboard was all he needed to create this spectacular mad lib. ";
+        html += "Unfortunately, his creativity ran out when <u>" + fields['number'].toString() + "</u> <u>" + fields['food'] + "</u> fell off the table. ";
+        html += "He had to run out on a <u>";
+
+        for (var i = 0; i < fields['transportation'].length-1; i++) {
+          html = html + fields['transportation'][i] + ", ";
+        }
+
+        if (fields['transportation'].length != 1) {
+          html += "and a " + fields['transportation'][fields['transportation'].length-1] + "</u> to go get more. ";
+        } else {
+          html +=  fields['transportation'][fields['transportation'].length-1] + "</u> to go get more. ";
+        }
+
+        html += "And that is why his mad lib has to end here :-(</p>";
+        document.getElementById("#mad-lib").innerHTML = html;
+      }
+
+
+      function displayErr() {
+        document.getElementById("flashMessage").innerHTML = "Please fill in all fields correctly.";
+      }
+
+      function cancelErr() {
+        document.getElementById("flashMessage").innerHTML = "";
+      }
+    </script>
+  </body>
+
+</html>
