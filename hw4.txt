@@ -1,0 +1,12 @@
+HW4 Responses
+=============
+
+1.1. The return code for GET /home HTTP/1.1 is 200 OK.
+
+1.2. The return code for GET /wiki HTTP/1.1 is 302 FOUND (because of a redirect), followed by a return code of 200 OK from a GET request to en.wikipedia.org.
+
+1.3. The return code for PUT /wiki HTTP/1.1 is 200 OK.
+
+2. When the browser loads http://people.ischool.berkeley.edu/~<USER>/server/wiki, the browser first tries to resolve the IP address that the URL maps to by talking to a DNS server. Once it has a correct IP, it sends an HTTP request (specifically, a GET request) to that IP, which probably has some sort of proxy server that connects the browser to the server through some port. Once the server receives the request, it gathers the information that was requested, bundles it into a packet, and sends the packet of information back to the browser. This information includes information such as content length, the status code, etc. 
+
+3. The return code for http://people.ischool.berkeley.edu/~<USER>/server/ is a 404 NOT FOUND, because the Flask server doesn't have a route that routes to '/'.
