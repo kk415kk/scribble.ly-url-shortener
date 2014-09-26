@@ -1,0 +1,25 @@
+Homework 5 Solutions
+====================
+1. The HTTP command used to change the response of /home to include my full name and the title of this course is: 
+GET /home?title=Web%20Architecture&name=Kevin%20Kao HTTP/1.1
+Host: localhost
+
+2. The command to set the redirect using a PUT request is:
+PUT /wiki HTTP/1.1
+Host: localhost
+Content-Length: 18
+Content-Type: application/x-www-form-urlencoded
+
+url=www.google.com
+
+We can verify this because the response body includes "Stored wiki => www.google.com" instead of "Stored wiki => en.wikipedia.org".
+
+3. The command to set the redirect using a POST request is:
+POST /wiki HTTP/1.1
+Host: localhost
+Content-Length: 18
+Content-Type: application/x-www-form-urlencoded
+
+url=www.google.com
+
+4. 
