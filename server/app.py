@@ -66,8 +66,7 @@ def i253():
     resp = flask.make_response(
             check_output(['convert', '-size', '600x400', 'xc:transparent',
                 '-frame', '10x30',
-                #'-font', '/usr/share/fonts/liberation/LiberationSerif-BoldItalic.ttf',
-                '-font', '/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-R.ttf',
+                '-font', '/usr/share/fonts/liberation/LiberationSerif-BoldItalic.ttf',
                 '-fill', 'black',
                 '-pointsize', '32',
                 '-draw',
