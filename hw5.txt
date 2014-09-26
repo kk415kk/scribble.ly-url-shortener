@@ -7,19 +7,21 @@ Host: localhost
 2. The command to set the redirect using a PUT request is:
 PUT /wiki HTTP/1.1
 Host: localhost
-Content-Length: 18
+Content-Length: 25
 Content-Type: application/x-www-form-urlencoded
 
-url=www.google.com
+url=http://www.google.com
 
 We can verify this because the response body includes "Stored wiki => www.google.com" instead of "Stored wiki => en.wikipedia.org".
 
 3. The command to set the redirect using a POST request is:
 POST /wiki HTTP/1.1
 Host: localhost
-Content-Length: 18
+Content-Length:25 
 Content-Type: application/x-www-form-urlencoded
 
-url=www.google.com
+url=http://www.google.com
 
-4. 
+4. See server/app.py - the 'Content-Type' header was set to 'image/png'. Tested in Chrome.
+
+Extra Credit: see server/app.py
