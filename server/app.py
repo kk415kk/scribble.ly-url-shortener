@@ -66,6 +66,7 @@ def i253():
     img_types = ['image/png', 'image/webp']
     accepted_types = request.headers['Accept'].split(',') if request.headers['Accept'] != None else []
 
+    found = False
     for a_type in accepted_types:
         if a_type in img_types:
             found = True
