@@ -63,18 +63,29 @@ def i253():
     name = request.args.get("name", "Jim")
     adjective = request.args.get("adjective", "fun")
 
-    resp = flask.make_response(
-            check_output(['convert', '-size', '600x400', 'xc:transparent',
-                '-frame', '10x30',
-                '-font', '/usr/share/fonts/liberation/LiberationSerif-BoldItalic.ttf',
-                '-fill', 'black',
-                '-pointsize', '32',
-                '-draw',
-                  "text 30,60 'My %s %s said i253 was %s'" % (relationship, name, adjective),
-                '-raise', '30',
-                'png:-']), 200);
-    # Comment in to set header below
-    resp.headers['Content-Type'] = 'image/png'
+    img_types = ['image/png', 'image/webp']
+    accepted_types = request.headers['Accept'].split(',') if request.headers['Accept'] != None else []
+
+    for a_type in accepted_types:
+        if a_type in img_types:
+            found = True
+            break
+    if found == True:
+        resp = flask.make_response(
+	        check_output(['convert', '-size', '600x400', 'xc:transparent',
+	    	    '-frame', '10x30',
+		    '-font', '/usr/share/fonts/liberation/LiberationSerif-BoldItalic.ttf',
+		    '-fill', 'black',
+		    '-pointsize', '32',
+		    '-draw',
+		     "text 30,60 'My %s %s said i253 was %s'" % (relationship, name, adjective),
+		    '-raise', '30',
+                    'png:-']), 200);
+        # Comment in to set header below
+        resp.headers['Content-Type'] = 'image/png'
+    else:
+        resp = flask.make_response('My %s %s said i253 was %s' % (relationship, name, adjective), 200)
+        resp.headers['Content-Type'] = 'plain/text'
 
     return resp
 
