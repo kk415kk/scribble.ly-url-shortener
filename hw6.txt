@@ -1,0 +1,38 @@
+Homework 6 Answers
+==================
+
+1. The number of public repositories Jim has is: 39
+curl -i https://api.github.com/users/jblomo
+
+
+
+2. The commands I used to get the full names of the repos that Jim is a member of are:
+$ curl -X GET "https://api.github.com/users/jblomo/repos?type=member&sort=full_name" > output.json
+$ python
+>>> import json
+>>> data = json.load(open('output.json'))
+>>> [repo["full_name"].encode('utf8') for repo in data]
+
+The JSON response was too long to read off, so I used Python to grab the names of the repos:
+['AJRenold/n_network', 'brynamo/webarch2014', 'corymc/webarch2013', 'davidmarin/doloop', 'ellenvanwyk/webarch2014', 'evphan/webarch2013', 'haroonrasheed333/datamining290', 'iaperez/datamining290', 'iaperez/DataMiningProject-WhoMadeThatMovie', 'ikenohate09/project-webarch2013', 'kanderek/project-webarch', 'kayvannj/webarch2013', 'laykopi/project-webarch2013', 'levand/clj-soy', 'parvizu/WebArch-finalProjectPart1', 'parvizu/WebArch-finalProjectPart2', 'parvizu/webarch2013', 'pjloury/webarch2013', 'prabhamatta/datamining290', 'priya-I/AOMining', 'priya-I/datamining290', 'roidrage/lograge', 'samtokheim/datamining290', 'seekshreyas/shrink', 'shaohan/project-webarch2013', 'sonalisharma/datamining290', 'tantanm/webarch2013']
+
+
+
+3. The commands I used to get the logins of the contributors to the mrjobs Yelp repository are:
+$ curl -X GET "https://api.github.com/repos/yelp/mrjob/contributors" > output.json
+$ python
+>>> import json
+>>> data = json.load(open('output.json'))
+>>> [contrib['login'].encode('utf8') for contrib in data]
+
+The logins are:
+['davidmarin', 'irskep', 'sudarshang', 'tarnfeld', 'anusha-r', 'ashkop', 'icio', 'msabramo', 'ddehghan', 'dnephin', 'ewencp', 'Roguelazer', 'ShusenLiu', 'timtadh', 'jblomo', 'PhilSwanson', 'smallredbean', 'ymilki', 'ap-ensighten', 'bretthoerner', 'unshift', 'geota', 'dterror', 'servetus', 'kienpham2000', 'baris', 'iph', 't2y', 'derwiki', 'zonca']
+
+
+
+4. The command I used to get the message of the first commit to the webarch253 repo by jblomo is:
+curl -X GET "https://api.github.com/repos/jblomo/webarch253/commits"
+
+The first commit in jblomo's webarch253 repository is: "Frontend slides"
+
+
