@@ -1,9 +1,70 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div class="home-form">
-      <form>
-        <h2>Shorten.ly</h2>
-        <input class="url-box" type="text" name="url" placeholder="url"><br>
-      </form>
+<div class="home-form">
+  <div id="flash-messages">
+  </div>
+  <form id="shorten-form" onsubmit="return false;">
+    <h2><a href="/">scribble.ly</a></h2>
+    <br>
+    <div class="form-group">
+      <label>URL:</label>
+      <div class="input-group shift-left">
+        <div class="input-group-addon">www.</div>
+        <input class="url-box" type="text" name="url"><br>
+      </div>
     </div>
+    <div class="form-group">
+      <input type="submit" value="scribble">
+    </div>
+  </form>
+
+  <br>
+  <br>
+  <div id="output-url">
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
+    {% for message in get_flashed_messages() %}
+      text = text + "<p>" + "{{ message }}" + "</p>"
+    {% endfor %}
+    text += "</div>"
+    $("#flash-messages").html(text);
+    $("#flash").fadeIn();
+  })
+
+  $("#shorten-form").submit(function(event) {
+    event.preventDefault();
+    var values = $(this).serialize();
+    var url = values.split("=").slice(1).join("");
+    if (url == "") {
+      alert('error');
+    }
+    $.post("/shorts", { url: url }, function(data) {
+      //alert(JSON.stringify(data, null, 4));
+      display_url(data['s_url']);
+    });
+  })
+
+  function display_url(s_url) {
+    var text = "<div id='output' style='display: none;'><p>Your shortened URL is: ";
+    text += "<a href='/short/";
+    text += s_url.toString();
+    text += "'>scribble.ly/";
+    text += s_url.toString();
+    text += "</a></p>";
+    text += "<p>The shortcode slug is: ";
+    text += s_url.toString();
+    text += "</p>";
+    text += "</div>";
+    $("#output-url").html(text);
+    $("#output").fadeIn();
+  }
+
+  function close(element) {
+    document.getElementById(element).innerHTML = "";
+  }
+</script>
 {% endblock %}
