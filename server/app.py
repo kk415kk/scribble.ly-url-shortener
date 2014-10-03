@@ -8,8 +8,9 @@ from os import environ
 import string, random
 
 import json
-from functools import wraps
-from flask import redirect, request, current_app
+from datetime import timedelta  
+from functools import wraps, update_wrapper
+from flask import Flas, redirect, request, current_app, make_response
 
 app = flask.Flask(__name__)
 app.debug = True
@@ -19,30 +20,55 @@ short_to_long_db = shelve.open("stl.db")
 long_to_short_db = shelve.open("lts.db")
 BASE_URL = "scribble.ly/"
 
-def support_jsonp(f): 
-  """
-  Wraps JSONified output for JSONP
-  """
-  @wraps(f)
-  def decorated_function(*args, **kwargs):
-    callback = request.args.get('callback', False)
-    if callback:
-      content = str(callback) + '(' + str(f().data) + ')'
-      return current_app.response_class(content, mimetype='application/json')
-    else:
-      return f(*args, **kwargs)
-  return decorated_function
+def crossdomain(origin=None, methods=None, headers=None, max_age=21600, attach_to_all=True, automatic_options=True):  
+    if methods is not None:
+        methods = ', '.join(sorted(x.upper() for x in methods))
+    if headers is not None and not isinstance(headers, basestring):
+        headers = ', '.join(x.upper() for x in headers)
+    if not isinstance(origin, basestring):
+        origin = ', '.join(origin)
+    if isinstance(max_age, timedelta):
+        max_age = max_age.total_seconds()
+
+    def get_methods():
+        if methods is not None:
+            return methods
+
+        options_resp = current_app.make_default_options_response()
+        return options_resp.headers['allow']
+
+    def decorator(f):
+        def wrapped_function(*args, **kwargs):
+            if automatic_options and request.method == 'OPTIONS':
+                resp = current_app.make_default_options_response()
+            else:
+                resp = make_response(f(*args, **kwargs))
+            if not attach_to_all and request.method != 'OPTIONS':
+                return resp
+
+            h = resp.headers
+
+            h['Access-Control-Allow-Origin'] = origin
+            h['Access-Control-Allow-Methods'] = get_methods()
+            h['Access-Control-Max-Age'] = str(max_age)
+            if headers is not None:
+                h['Access-Control-Allow-Headers'] = headers
+            return resp
+
+        f.provide_automatic_options = False
+        return update_wrapper(wrapped_function, f)
+    return decorator
 
 @app.route('/', methods=['GET'])
 @app.route('/home', methods=['GET'])
+@crossdomain(origin='*')
 def home():
   """Builds a template based on a GET request, with some default
   arguments"""
   return flask.render_template('home.html', title="Home")
 
-
-@app.route('/shorts', methods=['POST'])
-@support_jsonp
+@app.route('/shorts', methods=['POST', 'OPTIONS'])
+@crossdomain(origin='*')
 def shorten_submission():
   l_url = str(request.form['url'])
   s_url = shorten_url(l_url)
