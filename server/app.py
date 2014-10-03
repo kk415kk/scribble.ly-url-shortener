@@ -66,8 +66,7 @@ def crossdomain(origin=None, methods=None, headers=None,
 
 
 @app.route('/', methods=['GET'])
-@app.route('/home', methods=['GET', 'OPTIONS'])
-@crossdomain(origin='*')
+@app.route('/home', methods=['GET'])
 def home():
   """Builds a template based on a GET request, with some default
   arguments"""
@@ -78,7 +77,10 @@ def home():
 def shorten_submission():
   l_url = str(request.form['url'])
   s_url = shorten_url(l_url)
-  return flask.jsonify(s_url=s_url)
+  resp = flask.make_response(flask.jsonify(s_url=s_url))
+  resp.headers['Access-Control-Allow-Headers'] = "Origin, \
+		X-Requested-With,Content-Type, Accept"
+  return resp
 
 def shorten_url(l_url):
   if l_url in long_to_short_db:
