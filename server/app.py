@@ -11,6 +11,7 @@ from flask import Flask, redirect, request, current_app, make_response
 app = flask.Flask(__name__)
 app.debug = True
 app.secret_key = "webarch253"
+app.config['APPLICATION_ROOT'] = environ.get("ROOT", "/~kkao/server/")
 
 short_to_long_db = shelve.open("stl.db")
 long_to_short_db = shelve.open("lts.db")

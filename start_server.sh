@@ -1,3 +1,3 @@
 #!/bin/bash
 
-FLASK_PORT=5000 python server/app.py
+ROOT=/ FLASK_PORT=5000 python server/app.py
