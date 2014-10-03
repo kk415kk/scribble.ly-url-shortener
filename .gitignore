@@ -1,1 +1,2 @@
-server/shorten.db
+*.db
+*.pyc
