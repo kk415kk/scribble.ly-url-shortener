@@ -48,7 +48,9 @@ def fetch_url_mapping(name):
       l_url = 'http://www.' + short_to_long_db[s_url]
       return flask.redirect(l_url)
   flask.flash("Unable to resolve shortcode: " + (str(name) if name != None else ""))
-  return flask.render_template('home.html', code=404)
+  resp = flask.make_response(flask.render_template('home.html'))
+  resp.status_code = 404
+  return resp
 
 def clean_url(url):
   if url.startswith('http://'):
@@ -62,7 +64,9 @@ def clean_url(url):
 @app.errorhandler(404)
 def page_not_found(e):
   flask.flash("Page does not exist")
-  return flask.render_template('home.html', code=404)
+  resp = flask.make_response(flask.render_template('home.html'))
+  resp.status_code = 404
+  return resp
 
 if __name__ == "__main__":
     app.run(port=int(environ['FLASK_PORT']))

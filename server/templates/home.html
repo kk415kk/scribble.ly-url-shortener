@@ -51,16 +51,20 @@
     var values = $(this).serialize();
     var url = values.split("=").slice(1).join("");
     if (url == "") {
-      alert('error');
+      var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
+      text += "Please fill in a valid URL to be scribbled.";
+      text += "</div>";
+      $("#flash-messages").html(text);
+      $("#flash").fadeIn();
+    } else {
+      $.post(basePath + "/shorts", { url: url }, function(data) {
+        display_url(data['s_url']);
+      });
     }
-
-    // CORS work-around
-    $.post(basePath + "/shorts", { url: url }, function(data) {
-      display_url(data['s_url']);
-    });
   })
 
   function display_url(s_url) {
+    close("#flash-messages");
     var text = "<div id='output' style='display: none;'><p>Your shortened URL is: ";
     text += "<a href='"
     text += basePath
@@ -78,7 +82,7 @@
   }
 
   function close(element) {
-    document.getElementById(element).innerHTML = "";
+    $(element).html("");
   }
 </script>
 {% endblock %}
