@@ -10,7 +10,7 @@ import string, random
 import json
 from datetime import timedelta  
 from functools import wraps, update_wrapper
-from flask import Flas, redirect, request, current_app, make_response
+from flask import Flask, redirect, request, current_app, make_response
 
 app = flask.Flask(__name__)
 app.debug = True
