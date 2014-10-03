@@ -7,19 +7,29 @@ from flask import request
 from os import environ
 import string, random
 
-from datetime import timedelta
-from flask import make_response, current_app
-from functools import update_wrapper
-
+import json
+from functools import wraps
+from flask import redirect, request, current_app
 
 app = flask.Flask(__name__)
 app.debug = True
 app.secret_key = "webarch253"
-cors = CORS(app)
 
 short_to_long_db = shelve.open("stl.db")
 long_to_short_db = shelve.open("lts.db")
 BASE_URL = "scribble.ly/"
+
+def support_jsonp(f): 
+"""Wraps JSONified output for JSONP"""
+  @wraps(f)
+  def decorated_function(*args, **kwargs):
+    callback = request.args.get('callback', False)
+  if callback:
+    content = str(callback) + '(' + str(f().data) + ')'
+    return current_app.response_class(content, mimetype='application/json')
+  else:
+    return f(*args, **kwargs)
+  return decorated_function
 
 @app.route('/', methods=['GET'])
 @app.route('/home', methods=['GET'])
@@ -30,14 +40,11 @@ def home():
 
 
 @app.route('/shorts', methods=['POST'])
+@support_jsonp
 def shorten_submission():
-  print "got here"
   l_url = str(request.form['url'])
   s_url = shorten_url(l_url)
-  resp = flask.make_response(flask.jsonify(s_url=s_url))
-  resp.headers['Access-Control-Allow-Headers'] = "http://people.ischool.berkeley.edu"
-  app.logger.debug(resp)
-  return resp
+  return flask.jsonify(s_url=s_url)
 
 def shorten_url(l_url):
   if l_url in long_to_short_db:
@@ -76,8 +83,6 @@ def clean_url(url):
 def page_not_found(e):
   flask.flash("Page does not exist")
   return flask.render_template('home.html', code=404)
-
-
 
 if __name__ == "__main__":
     app.run(port=int(environ['FLASK_PORT']))
