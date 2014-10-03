@@ -66,7 +66,7 @@
   function display_url(s_url) {
     close("#flash-messages");
     var text = "<div id='output' style='display: none;'><p>Your shortened URL is: ";
-    text += "<a href='"
+    text += "<a target='_blank' href='"
     text += basePath
     text += "/short/";
     text += s_url.toString();
