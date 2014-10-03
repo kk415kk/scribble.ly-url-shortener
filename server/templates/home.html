@@ -26,13 +26,15 @@
 
 <script>
   $(document).ready(function() {
-    var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
-    {% for message in get_flashed_messages() %}
-      text = text + "<p>" + "{{ message }}" + "</p>"
-    {% endfor %}
-    text += "</div>"
-    $("#flash-messages").html(text);
-    $("#flash").fadeIn();
+    {% if get_flashed_messages() %}
+      var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
+      {% for message in get_flashed_messages() %}
+        text = text + "<p>" + "{{ message }}" + "</p>"
+      {% endfor %}
+      text += "</div>"
+      $("#flash-messages").html(text);
+      $("#flash").fadeIn();
+    {% endif %}
   })
 
   $("#shorten-form").submit(function(event) {
