@@ -25,6 +25,15 @@
 </div>
 
 <script>
+  var protocol = "http://"
+  var host = window.location.host
+  var pathname = window.location.pathname.split("/").slice(0,3).join('/');
+  var basePath = protocol + host + pathname;
+
+  if (host != "people.ischool.berkeley.edu") {
+    basePath = protocol + host;
+  }
+
   $(document).ready(function() {
     {% if get_flashed_messages() %}
       var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
@@ -44,15 +53,18 @@
     if (url == "") {
       alert('error');
     }
-    $.post("/shorts", { url: url }, function(data) {
-      //alert(JSON.stringify(data, null, 4));
+
+    // CORS work-around
+    $.post(basePath + "/shorts", { url: url }, function(data) {
       display_url(data['s_url']);
     });
   })
 
   function display_url(s_url) {
     var text = "<div id='output' style='display: none;'><p>Your shortened URL is: ";
-    text += "<a href='/short/";
+    text += "<a href='"
+    text += basePath
+    text += "/short/";
     text += s_url.toString();
     text += "'>scribble.ly/";
     text += s_url.toString();
