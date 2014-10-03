@@ -31,11 +31,12 @@ def home():
 
 @app.route('/shorts', methods=['POST'])
 def shorten_submission():
+  print "got here"
   l_url = str(request.form['url'])
   s_url = shorten_url(l_url)
   resp = flask.make_response(flask.jsonify(s_url=s_url))
-  resp.headers['Access-Control-Allow-Headers'] = "Origin, \
-		X-Requested-With,Content-Type, Accept"
+  resp.headers['Access-Control-Allow-Headers'] = "http://people.ischool.berkeley.edu"
+  app.logger.debug(resp)
   return resp
 
 def shorten_url(l_url):
@@ -75,6 +76,8 @@ def clean_url(url):
 def page_not_found(e):
   flask.flash("Page does not exist")
   return flask.render_template('home.html', code=404)
+
+
 
 if __name__ == "__main__":
     app.run(port=int(environ['FLASK_PORT']))

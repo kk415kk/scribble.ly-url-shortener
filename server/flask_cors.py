@@ -15,7 +15,8 @@ import re
 from functools import update_wrapper
 
 from flask import make_response, request, current_app
-from six import string_types
+#from six import string_types
+string_types = basestring
 
 
 # Common string constants
