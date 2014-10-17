@@ -42,10 +42,9 @@ h1, h2, h3, h4, h5, h6 {
 .home-form {
   bottom: 0; left: 0; top: 100px; right: 0;
   margin: 10% auto auto auto;
-  width: 400px;
-  height: 300px;
+  width: 500px;
+  height: 400px;
   text-align: center;
-  padding: 25px;
 }
 
 .input-group-addon {
@@ -65,9 +64,10 @@ input[type="text"].url-box {
   height: 50px;
   width: 100%;
   font-size: 20px;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 footer {
   text-align: center;
 }
+

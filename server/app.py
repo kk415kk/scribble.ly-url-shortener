@@ -24,6 +24,10 @@ def home():
   arguments"""
   return flask.render_template('home.html', title="Home")
 
+@app.route('/analytics', methods=['GET'])
+def update_graph():
+  return flask.jsonify(new_data=[])
+
 @app.route('/shorts', methods=['POST'])
 def shorten_submission():
   l_url = str(request.form['url'])

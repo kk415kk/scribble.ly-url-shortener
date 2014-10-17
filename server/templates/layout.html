@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-    <title>Shorten.ly - {{ title }}</title>
+    <title>scribble.ly - {{ title }}</title>
 
     <!-- FONTS -->
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
@@ -16,13 +16,16 @@
     <!-- OTHER -->
     <script type="text/javascript" src="{{ config.APPLICATION_ROOT + 'static/js/jquery-1.11.1.min.js' }}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   </head>
 
   <body>
     <div class="container">
       {% block body %}{% endblock %}
       <footer class="footer">
+        <p><a href="#">About</a> | 
+          <a href="#">Contact</a> | 
+          <a href="#">Privacy Policy</a></p>
         <p>&copy; 2014 Kevin Kao.<br>
         Built with Python, Flask, and a little bit of motivation.</p>
       </footer>
