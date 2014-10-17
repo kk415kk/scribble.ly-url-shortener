@@ -1,0 +1,37 @@
+Homework 7 Responses
+=====================
+1. The output response of traceroute m.yelp.com is shown below; a recursive DNS server would ask the following IP addresses below in the order presented in order to find where m.yelp.com is located.
+m.root-servers.net
+h.gtld-servers.net
+ns1.p18.dynect.net
+
+2. The IP address of m.yelp.com are 198.51.132.34, 199.255.189.234 (for the SF servers):
+host m.yelp.com
+m.yelp.com has address 198.51.132.34
+;; Warning: Message parser reports malformed message packet.
+m.yelp.com is an alias for m.gslb.yelp.com.
+m.gslb.yelp.com is an alias for m.sfo1.yelp.com.
+
+host m.sfo1.yelp.com
+m.sfo1.yelp.com has address 199.255.189.34
+m.sfo1.yelp.com has address 199.255.189.234
+
+3. IP packets don't leave the Berkeley network for those domains, because they are all part of the Berkeley network.
+
+traceroute amplab.cs.berkeley.edu
+traceroute to amplab.cs.berkeley.edu (128.32.37.248), 30 hops max, 60 byte packets
+ 1  192.168.1.1 (192.168.1.1)  1.158 ms  1.387 ms  1.852 ms
+ 2  vlan514.inr-33-u3.Berkeley.EDU (169.229.114.1)  2.968 ms  3.371 ms  4.370 ms
+ 3  t6-13.inr-202-reccev.Berkeley.EDU (128.32.255.114)  4.804 ms  4.902 ms  6.070 ms
+ 4  reccev-eecs-br-10GE.EECS.Berkeley.EDU (128.32.255.58)  7.439 ms  7.515 ms  8.367 ms
+ 5  soda-10g-edge.EECS.Berkeley.EDU (169.229.59.242)  9.022 ms  9.119 ms  9.611 ms
+ 6  www-research2.CS.Berkeley.EDU (128.32.37.248)  9.316 ms !X  1.639 ms !X  1.642 ms !X
+
+traceroute harbinger.ischool.berkeley.edu
+traceroute to harbinger.ischool.berkeley.edu (128.32.78.16), 30 hops max, 60 byte packets
+ 1  192.168.1.1 (192.168.1.1)  1.070 ms  1.449 ms  1.959 ms
+ 2  vlan514.inr-33-u3.Berkeley.EDU (169.229.114.1)  3.373 ms  3.647 ms  4.101 ms
+ 3  t6-13.inr-201-sut.Berkeley.EDU (128.32.255.112)  14.747 ms  14.805 ms  14.896 ms
+ 4  t5-4.inr-211-srb.Berkeley.EDU (128.32.255.41)  40.543 ms  40.586 ms  42.132 ms
+
+
