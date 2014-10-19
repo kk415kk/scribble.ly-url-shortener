@@ -1,0 +1,3 @@
+Homework 8
+===========
+Using curl www.yelp.com > yelp.html yields a file size of 114 KB, while compressing it using curl --compressed www.yelp.com > yelp.html yields only a file size of 21435 B.
