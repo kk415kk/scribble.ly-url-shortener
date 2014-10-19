@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0; left: 0; top: 100px; right: 0;
   margin: 10% auto auto auto;
   width: 500px;
-  height: 400px;
+  height: 100%;
   text-align: center;
 }
 

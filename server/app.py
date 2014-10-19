@@ -24,9 +24,9 @@ def home():
   arguments"""
   return flask.render_template('home.html', title="Home")
 
-@app.route('/analytics', methods=['GET'])
+@app.route('/analytics_data', methods=['GET'])
 def update_graph():
-  return flask.jsonify(new_data=[])
+  return flask.jsonify(new_data=[1,2,3,4])
 
 @app.route('/shorts', methods=['POST'])
 def shorten_submission():
@@ -55,6 +55,10 @@ def fetch_url_mapping(name):
   resp = flask.make_response(flask.render_template('home.html'))
   resp.status_code = 404
   return resp
+
+@app.route('/analytics', methods=['GET'])
+def display_analytics():
+  return flask.render_template('analytics.html', title="Analytics")
 
 def clean_url(url):
   if url.startswith('http://'):

@@ -21,14 +21,39 @@
 
   <body>
     <div class="container">
-      {% block body %}{% endblock %}
-      <footer class="footer">
-        <p><a href="#">About</a> | 
-          <a href="#">Contact</a> | 
-          <a href="#">Privacy Policy</a></p>
-        <p>&copy; 2014 Kevin Kao.<br>
-        Built with Python, Flask, and a little bit of motivation.</p>
-      </footer>
+      <div class="home-form">
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="/analytics">Analytics</a></li>
+                <li><a href="#">Placeholder</a></li>
+                <li><a href="#">Placeholder</a></li>
+                <li><a href="#">Placeholder</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <h2><a href="{{ config['APPLICATION_ROOT'] }}">scribble.ly</a></h2>
+        <br>
+        {% block body %}{% endblock %}
+        <footer class="footer">
+          <p><a href="#">About</a> | 
+            <a href="#">Contact</a> | 
+            <a href="#">Privacy Policy</a></p>
+          <p>&copy; 2014 Kevin Kao.<br>
+          Built with Python, Flask, and a little bit of motivation.</p>
+        </footer>
+      </div>
     </div>
   </body>
 </html>
