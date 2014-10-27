@@ -35,9 +35,13 @@ def shorten_submission():
   return flask.jsonify(s_url=s_url)
 
 def shorten_url(l_url):
+  l_url = clean_url(l_url)
   if l_url in long_to_short_db:
     return long_to_short_db[l_url]
   r_shortcode = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase \
+                        + string.digits) for _ in range(6))
+  while r_shortcode in short_to_long_db:
+    r_shortcode = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase \
                         + string.digits) for _ in range(6))
   s_url = r_shortcode
   long_to_short_db[l_url] = s_url
@@ -49,7 +53,7 @@ def fetch_url_mapping(name):
   if name != None:
     s_url = str(name)
     if s_url in short_to_long_db:
-      l_url = 'http://www.' + short_to_long_db[s_url]
+      l_url = 'http://' + short_to_long_db[s_url]
       return flask.redirect(l_url)
   flask.flash("Unable to resolve shortcode: " + (str(name) if name != None else ""))
   resp = flask.make_response(flask.render_template('home.html'))
@@ -61,10 +65,10 @@ def display_analytics():
   return flask.render_template('analytics.html', title="Analytics")
 
 def clean_url(url):
-  if url.startswith('http://'):
-    url = url[len('http://'):]
-  if url.startswith('https://'):
-    url = url[len('https://')]
+  if url.startswith('http%3A%2F%2F'):
+    url = url[len('http%3A%2F%2F'):]
+  elif url.startswith('https%3A%2F%2F'):
+    url = url[len('https%3A%2F%2F')]
   if url.startswith('www.'):
     url = url[len('www.'):]
   return url

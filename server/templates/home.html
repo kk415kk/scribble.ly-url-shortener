@@ -6,10 +6,7 @@
 <form id="shorten-form" onsubmit="return false;">
   <div class="form-group">
     <label>URL:</label>
-    <div class="input-group shift-left">
-      <div class="input-group-addon">www.</div>
-      <input class="url-box" type="text" name="url"><br>
-    </div>
+    <input class="url-box" type="text" name="url" placeholder="http://www.google.com"><br>
   </div>
   <div class="form-group">
     <input type="submit" class="btn btn-primary btn-sm" value="scribble">
@@ -77,6 +74,7 @@
     text += "<p>The shortcode slug is: ";
     text += s_url.toString();
     text += "</p>";
+    text += "<br>"
     text += "</div>";
     $("#output-url").html(text);
     $("#output").fadeIn();
