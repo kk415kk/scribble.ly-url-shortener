@@ -32,9 +32,14 @@ def update_graph():
 def shorten_submission():
   l_url = str(request.form['url'])
   input_s_url = str(request.form.get('s_input', None))
+
+  errors = []
+  if input_s_url in short_to_long_db and not input_s_url == "":
+    errors.append("Your short code is already taken - generating a new one for you!")
+  elif l_url in long_to_short_db and not input_s_url == "":
+    errors.append("This URL already has a short code. Please use the one below.")
   s_url = shorten_url(l_url, input_s_url)
-  return flask.jsonify(s_url=s_url, errors=(1 if input_s_url in short_to_long_db and \
-    not input_s_url == "" else 0))
+  return flask.jsonify(s_url=s_url, errors=errors)
 
 def shorten_url(l_url, input_s_url=""):
   l_url = clean_url(l_url)

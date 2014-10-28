@@ -89,8 +89,12 @@
   function display_url(s_url, errors) {
     close("#flash-messages");
     var text = "<div id='output' class='alert alert-info' style='display: none;'>"
-    if (errors > 0) {
-      text += "<p>Your short code was already taken - we've generated a new one for you.</p>"
+    if (errors.length > 0) {
+      for (var i = 0; i < errors.length; i++) {
+        text += "<p>"
+        text += errors[i]
+        text += "</p>"
+      }
     }
     text += "<p>Your shortened URL is: ";
     text += "<a target='_blank' href='"
