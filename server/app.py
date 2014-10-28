@@ -30,7 +30,7 @@ def update_graph():
 
 @app.route('/shorts', methods=['POST'])
 def shorten_submission():
-  l_url = str(request.form['url'])
+  l_url = clean_url(str(request.form['url']))
   input_s_url = str(request.form.get('s_input', None))
 
   errors = []
@@ -42,7 +42,6 @@ def shorten_submission():
   return flask.jsonify(s_url=s_url, errors=errors)
 
 def shorten_url(l_url, input_s_url=""):
-  l_url = clean_url(l_url)
   if l_url in long_to_short_db:
     return long_to_short_db[l_url]
   r_shortcode = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase \
