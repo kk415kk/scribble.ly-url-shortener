@@ -84,7 +84,7 @@
       text += "</div>";
       $("#flash-messages").html(text);
       $("#flash").fadeIn();      
-    } else if (s_url.split("").length != _.intersection(s_url.split(""), alphabet).length) {
+    } else if (_(s_url.split("")).difference(alphabet).length != 0) {
       var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
       text += "Please use alphanumeric characters only.";
       text += "</div>";
