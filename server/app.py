@@ -75,14 +75,12 @@ def display_analytics():
   return flask.render_template('analytics.html', title="Analytics")
 
 def clean_url(url):
-  print url
   if url.startswith('http%3A%2F%2F'):
     url = url[len('http%3A%2F%2F'):]
   elif url.startswith('http://'):
     url = url[len('http://'):]
   if url.startswith('www.'):
     url = url[len('www.'):]
-  print url
   return url
 
 @app.errorhandler(404)
