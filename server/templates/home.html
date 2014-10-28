@@ -59,7 +59,7 @@
 
   $("#shorten-form").submit(function(event) {
     event.preventDefault();
-
+    var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
     var values = $(this).serializeArray();
     var url = values[0]["value"];
     var s_url = "";
@@ -79,6 +79,12 @@
       text += "</div>";
       $("#flash-messages").html(text);
       $("#flash").fadeIn();      
+    } else if (s_url.split("").length != _.intersection(s_url.split(""), alphabet).length) {
+      var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
+      text += "Please use alphanumeric characters only.";
+      text += "</div>";
+      $("#flash-messages").html(text);
+      $("#flash").fadeIn();   
     } else {
       $.post(basePath + "/shorts", { url: url, s_input: s_url }, function(data) {
         display_url(data['s_url'], data['errors']);
