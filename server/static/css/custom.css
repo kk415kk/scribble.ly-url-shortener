@@ -75,3 +75,8 @@ footer {
   text-align: center;
 }
 
+.input-group label {
+  font-weight: normal;
+  margin-top: auto;
+  margin-bottom: auto;
+}

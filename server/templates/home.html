@@ -5,11 +5,15 @@
 </div>
 <form method="POST" id="shorten-form" onsubmit="return false;">
   <div class="form-group">
-    <label>URL:</label>
-    <input class="url-box" type="text" name="url" placeholder="http://www.google.com"><br>
+    <div class="input-group shift-left">
+      <div class="input-group-addon"><label>URL</label></div>
+      <input class="url-box" type="text" name="url" placeholder="http://www.google.com"><br>
+    </div>
   </div>
   <div class="form-group">
-    <div id="personal-short"><a id="personal-a" href="">Want to name your own short URL?</a></div>
+    <div id="personal-short">
+      <a id="personal-a" href="">Want to name your own short URL?</a>
+    </div>
   </div>
   <br>
   <div class="form-group">
@@ -50,7 +54,8 @@
   $('#personal-short').click(function() {
     if (this.innerHTML.indexOf("personal-a") > -1) {
       $('#personal-short').fadeOut(function() {
-        $('#personal-short').html("<input type='text' name='s-url' class='url-box' style='display:hidden;' placeholder='aXd4E4'><div><b>6 alphanumeric characters only please!</b></div><div>If your long URL already has a short, we won't generate a new one.</div>");
+        text = "<div class='input-group shift-left'><div class='input-group-addon'><label>Short</label></div><input type='text' name='s-url' class='url-box' style='display:hidden;' placeholder='aXd4E4'></div><div><br><b>6 alphanumeric characters only please!</b></div><div>If your long URL already has a short, we won't generate a new one.</div>"
+        $('#personal-short').html(text);
         $('#personal-short').fadeIn();
       });
       return false;
