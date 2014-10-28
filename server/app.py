@@ -61,7 +61,9 @@ def fetch_url_mapping(name):
   if name != None:
     s_url = str(name)
     if s_url in short_to_long_db:
-      l_url = 'http://' + short_to_long_db[s_url]
+      mapped = short_to_long_db[s_url]
+      l_url = ('http://' +  mapped) if not mapped.startswith('https://') \
+              else ('https://' + mapped[len('https://'):])
       return flask.redirect(l_url)
   flask.flash("Unable to resolve shortcode: " + (str(name) if name != None else ""))
   resp = flask.make_response(flask.render_template('home.html'))
@@ -73,12 +75,14 @@ def display_analytics():
   return flask.render_template('analytics.html', title="Analytics")
 
 def clean_url(url):
+  print url
   if url.startswith('http%3A%2F%2F'):
     url = url[len('http%3A%2F%2F'):]
-  elif url.startswith('https%3A%2F%2F'):
-    url = url[len('https%3A%2F%2F')]
+  elif url.startswith('http://'):
+    url = url[len('http://'):]
   if url.startswith('www.'):
     url = url[len('www.'):]
+  print url
   return url
 
 @app.errorhandler(404)
