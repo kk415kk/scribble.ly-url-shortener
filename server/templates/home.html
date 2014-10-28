@@ -3,11 +3,15 @@
 {% block body %}
 <div id="flash-messages">
 </div>
-<form id="shorten-form" onsubmit="return false;">
+<form method="POST" id="shorten-form" onsubmit="return false;">
   <div class="form-group">
     <label>URL:</label>
     <input class="url-box" type="text" name="url" placeholder="http://www.google.com"><br>
   </div>
+  <div class="form-group">
+    <div id="personal-short"><a id="personal-a" href="">Want to name your own short URL?</a></div>
+  </div>
+  <br>
   <div class="form-group">
     <input type="submit" class="btn btn-primary btn-sm" value="scribble">
   </div>
@@ -19,7 +23,6 @@
 </div>
 <br>
 <br>
-
 
 <!-- SCRIPTS -->
 <script>
@@ -44,26 +47,52 @@
     {% endif %}
   })
 
+  $('#personal-short').click(function() {
+    if (this.innerHTML.indexOf("personal-a") > -1) {
+      $('#personal-short').fadeOut(function() {
+        $('#personal-short').html("<input type='text' name='s-url' class='url-box' style='display:hidden;' placeholder='aXd4E4'><div><b>6 alphanumeric characters only please!</b></div><div>If your long URL already has a short, we won't generate a new one.</div>");
+        $('#personal-short').fadeIn();
+      });
+      return false;
+    }
+  });
+
   $("#shorten-form").submit(function(event) {
     event.preventDefault();
-    var values = $(this).serialize();
-    var url = values.split("=").slice(1).join("");
+
+    var values = $(this).serializeArray();
+    var url = values[0]["value"];
+    var s_url = "";
+
+    if (values.length > 1) {
+      s_url = values[1]["value"];
+    }
     if (url == "") {
       var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
       text += "Please fill in a valid URL to be scribbled.";
       text += "</div>";
       $("#flash-messages").html(text);
       $("#flash").fadeIn();
+    } else if (s_url.length != 0 && s_url.length != 6) {
+      var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
+      text += "Please fill in a valid short URL to use, or leave the field empty.";
+      text += "</div>";
+      $("#flash-messages").html(text);
+      $("#flash").fadeIn();      
     } else {
-      $.post(basePath + "/shorts", { url: url }, function(data) {
-        display_url(data['s_url']);
+      $.post(basePath + "/shorts", { url: url, s_input: s_url }, function(data) {
+        display_url(data['s_url'], data['errors']);
       });
     }
   })
 
-  function display_url(s_url) {
+  function display_url(s_url, errors) {
     close("#flash-messages");
-    var text = "<div id='output' class='alert alert-info' style='display: none;'><p>Your shortened URL is: ";
+    var text = "<div id='output' class='alert alert-info' style='display: none;'>"
+    if (errors > 0) {
+      text += "<p>Your short code was already taken - we've generated a new one for you.</p>"
+    }
+    text += "<p>Your shortened URL is: ";
     text += "<a target='_blank' href='"
     text += basePath
     text += "/short/";
@@ -71,10 +100,9 @@
     text += "'>scribble.ly/";
     text += s_url.toString();
     text += "</a></p>";
-    text += "<p>The shortcode slug is: ";
+    text += "<p>The shortcode slug is: <pre>";
     text += s_url.toString();
-    text += "</p>";
-    text += "<br>"
+    text += "</pre></p>";
     text += "</div>";
     $("#output-url").html(text);
     $("#output").fadeIn();

@@ -31,15 +31,18 @@ def update_graph():
 @app.route('/shorts', methods=['POST'])
 def shorten_submission():
   l_url = str(request.form['url'])
-  s_url = shorten_url(l_url)
-  return flask.jsonify(s_url=s_url)
+  input_s_url = str(request.form.get('s_input', None))
+  s_url = shorten_url(l_url, input_s_url)
+  return flask.jsonify(s_url=s_url, errors=(1 if input_s_url in short_to_long_db and \
+    not input_s_url == "" else 0))
 
-def shorten_url(l_url):
+def shorten_url(l_url, input_s_url=""):
   l_url = clean_url(l_url)
   if l_url in long_to_short_db:
     return long_to_short_db[l_url]
   r_shortcode = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase \
-                        + string.digits) for _ in range(6))
+                        + string.digits) for _ in range(6)) if input_s_url == "" else \
+                        input_s_url
   while r_shortcode in short_to_long_db:
     r_shortcode = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase \
                         + string.digits) for _ in range(6))
