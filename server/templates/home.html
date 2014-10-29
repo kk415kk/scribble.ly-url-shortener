@@ -54,7 +54,7 @@
   $('#personal-short').click(function() {
     if (this.innerHTML.indexOf("personal-a") > -1) {
       $('#personal-short').fadeOut(function() {
-        text = "<div class='input-group shift-left'><div class='input-group-addon'><label>Short</label></div><input type='text' name='s-url' class='url-box' style='display:hidden;' placeholder='aXd4E4'></div><div><br><b>6 alphanumeric characters only please!</b></div><div>If your long URL already has a short, we won't generate a new one.</div>"
+        text = "<div class='input-group shift-left'><div class='input-group-addon'><label>Short</label></div><input type='text' name='s-url' class='url-box' style='display:hidden;' placeholder='aXdpEf'></div><div><br><b>6 alphabet characters only please!</b></div><div>If your long URL already has a short, we won't generate a new one.</div>"
         $('#personal-short').html(text);
         $('#personal-short').fadeIn();
       });
@@ -64,7 +64,7 @@
 
   $("#shorten-form").submit(function(event) {
     event.preventDefault();
-    var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
+    var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
     var values = $(this).serializeArray();
     var url = values[0]["value"];
     var s_url = "";
@@ -86,7 +86,7 @@
       $("#flash").fadeIn();      
     } else if (_(s_url.split("")).difference(alphabet).length != 0) {
       var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
-      text += "Please use alphanumeric characters only.";
+      text += "Please use alphabet characters only.";
       text += "</div>";
       $("#flash-messages").html(text);
       $("#flash").fadeIn();   
