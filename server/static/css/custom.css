@@ -8,6 +8,9 @@ body {
   font-family: 'Raleway', 'Ubuntu', sans-serif;
   color: #696969;
   background-color: #fff; 
+}
+
+.unused {
   background-image: 
   linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
   linear-gradient(#eee .1em, transparent .1em);
@@ -39,12 +42,16 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /** Center Forms **/
-.home-form {
-  bottom: 0; left: 0; top: 100px; right: 0;
-  margin: 10% auto auto auto;
+.home-wrap,
+.home-wrap-push {
+  bottom: 0; left: 0; top: 0; right: 0;
+  margin: auto auto auto auto;
   width: 500px;
-  height: 100%;
   text-align: center;
+}
+
+.home-wrap-push {
+  margin: 10% auto auto auto;
 }
 
 .url-box {
@@ -55,12 +62,12 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 20px;
 }
 
-h2 a,
-h2 a:hover {
+h1 a,
+h1 a:hover {
   color: #696969;
 }
 
-h2 a:hover {
+h1 a:hover {
   text-decoration: none;
 }
 
@@ -75,8 +82,37 @@ footer {
   text-align: center;
 }
 
+.center {
+  display: table;
+  margin: 0 auto;
+}
+
 .input-group label {
   font-weight: normal;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+#analytics-main {
+  text-align: left
+}
+
+#demo-chart {
+  text-align: center;
+  display: table;
+  margin: 0 auto;
+}
+
+.input-group-addon input[type="submit"] {
+  background: none;
+  border: none;
+}
+
+.container-md {
+  max-width: 70%;
+  text-align: center;
+}
+
+.container-md div.container-center {
+  display: inline-block;
 }

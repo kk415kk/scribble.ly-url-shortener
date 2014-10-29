@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 {% extends "layout.html" %}
 {% block body %}
-<div id="flash-messages">
-</div>
-<form method="POST" id="shorten-form" onsubmit="return false;">
-  <div class="form-group">
-    <div class="input-group shift-left">
-      <div class="input-group-addon"><label>URL</label></div>
-      <input class="url-box" type="text" name="url" placeholder="http://www.google.com"><br>
-    </div>
+
+<div class="home-wrap">
+  <div id="flash-messages">
   </div>
-  <div class="form-group">
-    <div id="personal-short">
-      <a id="personal-a" href="">Want to name your own short URL?</a>
+  <form method="POST" id="shorten-form" onsubmit="return false;">
+    <div class="form-group">
+      <div class="input-group shift-left">
+        <div class="input-group-addon"><label>URL</label></div>
+        <input class="url-box" type="text" name="url" placeholder="http://www.google.com"><br>
+      </div>
     </div>
+    <div class="form-group">
+      <div id="personal-short">
+        <a id="personal-a" href="">Want to name your own short URL?</a>
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary btn-sm" value="scribble">
+    </div>
+  </form>
+
+  <br>
+  <br>
+  <div id="output-url">
   </div>
   <br>
-  <div class="form-group">
-    <input type="submit" class="btn btn-primary btn-sm" value="scribble">
-  </div>
-</form>
+  <br>
 
-<br>
-<br>
-<div id="output-url">
+  <!-- Analytics Form -->
+  <form method="GET" id="analytics-form" onsubmit="return false;" style="display:none;">
+    <div class="form-group">
+      <div class="input-group shift-left">
+        <div class="input-group-addon"><label></label></div>
+      </div>
+    </div>
+  </form>
 </div>
-<br>
-<br>
 
 <!-- SCRIPTS -->
 <script>
