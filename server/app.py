@@ -13,8 +13,8 @@ app.debug = True
 app.secret_key = "webarch253"
 app.config['APPLICATION_ROOT'] = environ.get("ROOT", "/~kkao/server/")
 
-short_to_long_db = shelve.open("stl.db")
-long_to_short_db = shelve.open("lts.db")
+short_to_long_db = shelve.open("db/stl.db")
+long_to_short_db = shelve.open("db/lts.db")
 BASE_URL = "scribble.ly/"
 
 @app.route('/', methods=['GET'])
