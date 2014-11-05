@@ -1,0 +1,55 @@
+Homework 9
+==========
+
+1.1 
+SELECT COUNT(*) 
+FROM links
+WHERE created > "2014-10-14";
+
+Output:
++----------+
+| COUNT(*) |
++----------+
+|       10 |
++----------+
+
+1.2
+SELECT COUNT(*) 
+FROM links
+WHERE created < "2014-10-14" AND hit_count < 40;
+
++----------+
+| COUNT(*) |
++----------+
+|        4 |
++----------+
+
+2.1
+INSERT INTO links
+VALUES ("http://mercurynews.com", "blomo", 144, "2001-10-14");
+
+Output:
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+2.2 No, no one can see a partially complete insertion; this is due to isolation. When two processes try to view/change the data at the same time, they won't be able to see each other's partial progresses.
+
+3.1 
+UPDATE links 
+SET hit_count= 
+  (SELECT hit_count 
+   FROM (SELECT * FROM links) as B 
+   WHERE B.long_url='http://mercurynews.com' 
+   LIMIT 1) + 1 
+WHERE long_url='http://mercurynews.com';
+
+Output:
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+The new count is now 145 (see command/output):
+SELECT hit_count FROM links WHERE long_url='http://mercurynews.com';
++-----------+
+| hit_count |
++-----------+
+|       145 |
++-----------+
