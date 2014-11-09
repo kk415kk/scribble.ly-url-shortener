@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kevin Kao - Portfolio Home</title>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="This is my personal portfolio website, where I will showcase some of my projects as a software engineer. Some content includes a brief About Me, as well as my past experience and projects.">
+
+    <!-- FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <!-- FONTS END -->
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cascade.css">
+    <link rel="stylesheet" href="css/grid.css">
+    <!-- STYLES END -->
+
+  </head>
+
+  <body>
+
+    <div id="banner">
+      <div class="container">
+        <h1><a href="index.html">Kevin Kao's Spectacular Homepage</a></h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="left-grid">
+          <div class="box-empty" itemscope itemtype="http://schema.org/Person">
+            <h2 itemprop="name">Meet Kevin Kao!</h2>
+            <img src="extra_credit/assets/images/profile_pic.jpg" alt="Kevin" class="picture-border">
+            <br><br>
+            <p itemprop="affiliation">Undergraduate EECS major at UC Berkeley</p>
+            <p itemprop="jobTitle">Software Engineering Intern at LogicBlox</p>
+            <p itemprop="award">Regents and Chancellor's Scholar</p>
+            <p itemprop="email">kkao@berkeley.edu</p>
+          </div>
+        </div>
+
+        <div class="right-grid">
+          <div class="box-header">
+            <h2>Background</h2>
+          </div>
+          <div class="box-body">
+            <p>My skills are listed here.</p>
+            <h3>Programming Languages</h3>
+            <ul>
+              <li>Java</li>
+              <li>Python</li>
+              <li>JavaScript</li>
+              <li>Ruby/JRuby</li>
+              <li>C, C++</li>
+              <li>SQL</li>
+            </ul>
+            <h3>Frameworks, Libraries, Tools, Platforms</h3>
+            <p>This is a subset of the tools I've used in the past.</p>
+            <ul>
+              <li>Ubuntu, Windows</li>
+              <li>Node.js, Flask, Rails</li>
+              <li>Sails.js, D3.js</li>
+              <li>MySQL, Redis, HBase</li>
+              <li>Hadoop</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" itemscope itemtype="http://schema.org/Organization">
+        <h3>Upcoming Summer:</h3>
+        <h4 itemprop="name">LinkedIn</h4>
+        <ul>
+          <li itemprop="url"><a href="http://www.linkedin.com">Website</a></li>
+          <li itemprop="founder">Reid Hoffman</li>
+          <li itemprop="location">Mountain View, CA</li>
+          <li itemprop="foundingDate">Founded in December 2002</li>
+        </ul>
+      </div>
+
+      <div class="row" itemscope itemtype="http://schema.org/CreativeWork">
+        <h3>Projects:</h3>
+        <h4 itemprop="name">moocRP</h4>
+        <p itemprop="about">A Node.js application built to facilitate MOOC data distribution and data analytics sharing.</p>
+        <ul>
+          <li itemprop="url"><a href="http://www.github.com/kk415kk/moocRP">Github</a></li>
+          <li itemprop="creator">Kevin Kao</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container" id="footer">
+      <hr>
+      <footer class="pull-right">
+          &copy; 2014 Kevin Kao.<br>
+          Not built with with <a href="#">Bootstrap</a>, but just a little bit of motivation.
+          <br>
+          Extra Credit: <a href="extra_credit/index.html">Bootstrapped Version</a>
+      </footer>
+    </div>
+    <!-- Footer END -->
+
+  </body>
+</html>
