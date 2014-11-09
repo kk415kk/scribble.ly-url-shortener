@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kevin Kao - Home</title>
+    <title>Kevin Kao - Portfolio Home</title>
 
     <meta charset="UTF-8">
+    <meta name="description" content="This is my personal portfolio website, where I will showcase some of my projects as a software engineer. Some content includes a brief About Me, as well as my past experience and projects.">
 
     <!-- FONTS -->
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
@@ -30,11 +31,14 @@
     <div class="container">
       <div class="row">
         <div class="left-grid">
-          <div class="box-empty">
-            <h2>Meet Kevin Kao!</h2>
+          <div class="box-empty" itemscope itemtype="http://schema.org/Person">
+            <h2 itemprop="name">Meet Kevin Kao!</h2>
             <img src="extra_credit/assets/images/profile_pic.jpg" alt="Kevin" class="picture-border">
             <br><br>
-            <p>This is me! I'm a third year undergraduate EECS major at University of California, Berkeley.</p>
+            <p itemprop="affiliation">Undergraduate EECS major at UC Berkeley</p>
+            <p itemprop="jobTitle">Software Engineering Intern at LogicBlox</p>
+            <p itemprop="award">Regents and Chancellor's Scholar</p>
+            <p itemprop="email">kkao@berkeley.edu</p>
           </div>
         </div>
 
@@ -66,9 +70,25 @@
         </div>
       </div>
 
-      <div class="row">
-        <h4>Hobbies</h4>
-        <p>I like huskies. :-)</p> 
+      <div class="row" itemscope itemtype="http://schema.org/Organization">
+        <h3>Upcoming Summer:</h3>
+        <h4 itemprop="name">LinkedIn</h4>
+        <ul>
+          <li itemprop="url"><a href="http://www.linkedin.com">Website</a></li>
+          <li itemprop="founder">Reid Hoffman</li>
+          <li itemprop="location">Mountain View, CA</li>
+          <li itemprop="foundingDate">Founded in December 2002</li>
+        </ul>
+      </div>
+
+      <div class="row" itemscope itemtype="http://schema.org/CreativeWork">
+        <h3>Projects:</h3>
+        <h4 itemprop="name">moocRP</h4>
+        <p itemprop="about">A Node.js application built to facilitate MOOC data distribution and data analytics sharing.</p>
+        <ul>
+          <li itemprop="url"><a href="http://www.github.com/kk415kk/moocRP">Github</a></li>
+          <li itemprop="creator">Kevin Kao</li>
+        </ul>
       </div>
     </div>
 
