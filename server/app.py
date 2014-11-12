@@ -3,7 +3,8 @@ import shelve
 from subprocess import check_output
 import flask
 from flask import request
-from os import environ
+from os import environ, path
+import os
 import string, random
 import time
 from functools import wraps, update_wrapper
@@ -14,9 +15,13 @@ app.debug = True
 app.secret_key = "webarch253"
 app.config['APPLICATION_ROOT'] = environ.get("ROOT", "/~kkao/server/")
 
-short_to_long_db = shelve.open("db/stl.db")
-long_to_short_db = shelve.open("db/lts.db")
-usage_db = shelve.open("db/usage.db", writeback=True)
+DB_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'db')
+if not os.path.exists(DB_DIR):
+    os.makedirs(DB_DIR)
+
+short_to_long_db = shelve.open("server/db/stl.db")
+long_to_short_db = shelve.open("server/db/lts.db")
+usage_db = shelve.open("server/db/usage.db", writeback=True)
 BASE_URL = "scribble.ly/"
 
 ##############
