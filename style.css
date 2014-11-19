@@ -1,0 +1,56 @@
+
+#page-wrap {
+  width: 1140px; 
+  margin: 50px auto;
+  padding: 10px 20px;
+}
+
+#touchstart-support {
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px dotted black;
+}
+
+.col-1, .col-2, .col-3 {
+  width: 350px;
+  padding-left: 15px;
+  padding-right: 15px;
+  float: left;
+}
+
+.center {
+  width: 1080px;
+  padding-left: 15px;
+  padding-right; 15px;
+}
+
+@media screen and (max-width: 1140px) {
+  #page-wrap, .center {
+    width: 94%;
+  }
+  .col-1, .col-2 {
+    width: 41%;
+    padding: 1% 4%;
+  }
+  .col-2 {
+    float: right;
+  }
+  .col-3 {
+    clear: both;
+    padding: 1% 4%;
+    width: auto;
+    float: none;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .col-1, .col-2, .col-3 {
+    width: auto;
+    float: none;
+  }
+
+  .col-2 {
+    margin-left: 0px;
+  }
+}

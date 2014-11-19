@@ -1,0 +1,48 @@
+<head>
+  <title>Responsive Page</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id='page-wrap'>
+    <div class='center'>
+      <h1>Welcome to a responsive layout page!</h1>
+      <p>This is for HW11 for INFO253. Here, you can resize the page by zooming in and out, and the layout will change too.</p>
+      <p id='touchstart-support' style='display:none;'></p>
+    </div>
+    <div class='col-1' ontouchstart='highlight("col-1");'>
+      <h2>Column 1</h2>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+    </div>
+    <div class='col-2' ontouchstart='highlight("col-2");'>
+      <h2>Column 2</h2>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+    </div>
+    <div class='col-3' ontouchstart='highlight("col-3");'>
+      <h2>Column 3</h2>
+      <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+    </div>
+  </div>
+
+
+  <script>
+    function highlight(colID) {
+      var color = $("." + colID).css("background-color")
+      if (color == "rgb(248, 248, 248)") {
+        $("." + colID).css("background-color", "white")
+      } else {
+        $("." + colID).css("background-color", "#f8f8f8")
+      }
+    }
+    
+    var text = ''
+    if ('ontouchstart' in document.documentElement) {
+      text += 'Touch support is enabled on your device.';
+    } else {
+      text += 'Touch support is not enabled on your device.';
+    }
+    $('#touchstart-support').html(text).fadeIn();
+
+  </script>
+</body>
