@@ -98,6 +98,7 @@ def update_graph():
 def analyze_url():
   s_url = str(request.args['s_url'])
   data = get_tracker(s_url)
+  print data
   return flask.jsonify(data)
 
 ############################
@@ -112,18 +113,23 @@ def insert_tracker(s_url):
 def update_tracker(s_url):
   curr_time = time.strftime("%H")
   curr_date = time.strftime("%Y-%m-%d")
+  if s_url not in usage_db:
+    usage_db[s_url] = {} 
+
   if curr_date in usage_db[s_url]:
     if curr_time in usage_db[s_url][curr_date]:
-      print 'got here'
+      print '1'
       print usage_db[s_url][curr_date][curr_time]
       print usage_db[s_url][curr_date][curr_time] + 1
-      usage_db[s_url][curr_date][curr_time] = 5 #usage_db[s_url][curr_date][curr_time] + 1
+      usage_db[s_url][curr_date][curr_time] += 1
     else:
+      print '2'
       usage_db[s_url][curr_date][curr_time] = 1
-    print usage_db
   else:
+    print '3'
     usage_db[s_url][curr_date] = { curr_time: 1 }
   print usage_db
+  print "Usage: %s" % get_tracker(s_url)
 
 def get_tracker(s_url, hourly=False):
   if s_url == "" or s_url == None or s_url not in usage_db:

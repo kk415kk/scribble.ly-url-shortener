@@ -99,9 +99,17 @@ function generateDates() {
 
 // Formats the date
 function formatDate(date) {
-  var dd = date.getDate();
-  var mm = date.getMonth()+1;
-  var yyyy = date.getFullYear();
+  var dd = date.getDate().toString();
+  var mm = (date.getMonth()+1).toString();
+  var yyyy = date.getFullYear().toString();
+
+  if (dd.length == 1) {
+    dd = '0' + dd
+  }
+  if (mm.length == 1) {
+    mm = '0' + mm
+  }
+
   var fullDate = yyyy + "-" + mm + "-" + dd;
   return fullDate
 }
