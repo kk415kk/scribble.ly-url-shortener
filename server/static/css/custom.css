@@ -1,0 +1,118 @@
+/** 
+ * Created by Kevin Kao 
+ * Overwrites latest Bootstrap version
+ **/
+
+/** Text **/
+body {
+  font-family: 'Raleway', 'Ubuntu', sans-serif;
+  color: #696969;
+  background-color: #fff; 
+}
+
+.unused {
+  background-image: 
+  linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+  linear-gradient(#eee .1em, transparent .1em);
+  background-size: 100% 1.2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Raleway', 'Ubuntu', sans-serif;
+}
+/** Text END **/
+
+/** Dropdown **/
+.dropdown-menu {
+ border-radius: 0;
+}
+/** Dropdown END **/
+
+/** Banners **/
+.banner {
+  border-top: solid 4px #127872;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  background-color: #0e6471;
+  width: 100%;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+/** Banners END **/
+
+
+/** Center Forms **/
+.home-wrap,
+.home-wrap-push {
+  bottom: 0; left: 0; top: 0; right: 0;
+  margin: auto auto auto auto;
+  width: 500px;
+  text-align: center;
+}
+
+.home-wrap-push {
+  margin: 10% auto auto auto;
+}
+
+.url-box {
+  text-align: center;
+}
+
+.input-group-addon {
+  font-size: 20px;
+}
+
+h1 a,
+h1 a:hover {
+  color: #696969;
+}
+
+h1 a:hover {
+  text-decoration: none;
+}
+
+input[type="text"].url-box {
+  height: 50px;
+  width: 100%;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+footer {
+  text-align: center;
+}
+
+.center {
+  display: table;
+  margin: 0 auto;
+}
+
+.input-group label {
+  font-weight: normal;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#analytics-main {
+  text-align: left
+}
+
+#demo-chart {
+  text-align: center;
+  display: table;
+  margin: 0 auto;
+}
+
+.input-group-addon input[type="submit"] {
+  background: none;
+  border: none;
+}
+
+.container-md {
+  max-width: 70%;
+  text-align: center;
+}
+
+.container-md div.container-center {
+  display: inline-block;
+}

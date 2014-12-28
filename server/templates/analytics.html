@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block body %}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/c3/0.3.0/c3.min.js"></script>
+
+
+<div id="demo-chart"></div>
+
+<div class="home-wrap">
+  <div id="flash-messages">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="center">
+      <h2><font color="green">visualize</font> your data</h2>
+    </div>
+
+    <form method="GET" id="analytics-form" onsubmit="return false;">
+      <div class="form-group">
+        <div class="input-group shift-left">
+          <div class="input-group-addon"><label>Short Code</label></div>
+          <input class="url-box" type="text" name="s_url" placeholder="ABcE3F"><br>
+          <div class="input-group-addon"><input type="submit" value="analyze"></div>
+        </div>
+      </div>
+    </form>
+
+    <br>
+    <div id="time-series-div" class="row" style="display:None;">
+      <div class="center"><h3>time series (clicks)</h3></div>
+      <div id="url-time-series" class="center"></div>
+    </div>
+    <br><br>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  var protocol = "http://"
+  var host = window.location.host
+  var pathname = window.location.pathname.split("/").slice(0,3).join('/');
+  var basePath = protocol + host + pathname;
+
+  if (host != "people.ischool.berkeley.edu") {
+    basePath = protocol + host;
+  }
+
+  $("#analytics-form").submit(function(event) {
+    event.preventDefault();
+    var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
+    var values = $(this).serializeArray();
+    var s_url = values[0]["value"];
+
+    if (s_url.length != 0 && s_url.length != 6) {
+      var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
+      text += "Please fill in a valid short code (6 alphanumeric characters)";
+      text += "</div>";
+      $("#flash-messages").html(text);
+      $("#flash").fadeIn();      
+    } else if (_(s_url.split("")).difference(alphabet).length != 0) {
+      var text = "<div id='flash' class='alert alert-info' style='display: none;'>";
+      text += "Please use alphanumeric characters only.";
+      text += "</div>";
+      $("#flash-messages").html(text);
+      $("#flash").fadeIn();   
+    } else {
+      $('#time-series-div').fadeIn();
+      retrieveDataPoints(s_url, function(data) { generateChart(s_url, data) });
+    }
+  })
+
+  function retrieveDataPoints(s_url, cb) {
+    $.get(basePath + "/analyze", { s_url: s_url }, cb);
+  }
+</script>
+
+<script>
+// Generates a list of dates for the past week
+function generateDates() {
+  var numDays = 7;
+  var today = new Date(),
+      formatToday = formatDate(today);
+  var pastWeek = [formatToday];
+
+  var cDate = today;
+  for (var i = 0; i < numDays; i += 1) {
+    var prevDay = new Date(cDate);
+    prevDay.setDate(cDate.getDate()-1);
+    var formatPrevDay = formatDate(prevDay);
+    pastWeek.push(formatPrevDay);
+    cDate = prevDay;
+  }
+  pastWeek.reverse();
+  return pastWeek;
+}
+
+// Formats the date
+function formatDate(date) {
+  var dd = date.getDate().toString();
+  var mm = (date.getMonth()+1).toString();
+  var yyyy = date.getFullYear().toString();
+
+  if (dd.length == 1) {
+    dd = '0' + dd
+  }
+  if (mm.length == 1) {
+    mm = '0' + mm
+  }
+
+  var fullDate = yyyy + "-" + mm + "-" + dd;
+  return fullDate
+}
+
+function getData(s_url, dates, urlData) {
+  var dataPoints = [s_url];
+  for (var i = 0; i < dates.length; i++) {
+    var date = dates[i];
+    if (date in urlData) {
+      dataPoints.push(urlData[date]);
+    } else {
+      dataPoints.push(0);
+    }
+  }
+  return dataPoints;
+}
+
+function generateChart(s_url, urlData) {
+  var pastWeek = generateDates();
+  var weekData = getData(s_url, pastWeek, urlData);
+  pastWeek.unshift("x");
+
+  var chart = c3.generate({
+      bindto: '#url-time-series',
+      size: {
+        width: 750,
+        height: 200,
+      },
+      padding: {
+        right: 20
+      },
+      data: {
+          x: 'x',
+          // xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
+          columns: [
+              //['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
+              // ['x', '20130101', '20130102', '20130103', '20130104', '20130105', '20130106'],
+              //[s_url, 30, 200, 100, 400, 150, 250],
+              //['google.com', 130, 340, 200, 500, 250, 350]
+              pastWeek,
+              weekData
+          ]
+      },
+      axis: {
+          x: {
+              type: 'timeseries',
+              tick: {
+                  format: '%Y-%m-%d'
+              },
+              label: {
+                text: 'Date',
+                position: 'center'
+              }
+          },
+          y: {
+            label: {
+              text: 'Visits',
+              position: 'outer-middle'
+            }
+          }
+      },
+      legend: {
+        position: 'outer-right'
+      }
+  });
+
+  // setTimeout(function () {
+  //     chart.load({
+  //         columns: [
+  //           ['yelp.com', 400, 500, 450, 700, 600, 500]
+  //         ]
+  //     });
+  // }, 1000);
+
+  setInterval(function() {
+    retrieveDataPoints(s_url, function replot(urlData) {
+      var pastWeek = generateDates();
+      var weekData = getData(s_url, pastWeek, urlData);
+      pastWeek.unshift("x");
+
+      chart.load({
+        columns: [
+          weekData,
+        ]
+      });
+    });
+  }, 5000);
+}
+</script>
+
+{% endblock %}
