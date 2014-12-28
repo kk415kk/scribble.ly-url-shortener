@@ -1,4 +1,4 @@
-webarch2014
+scribble.ly
 ===========
 
-A private repository for Info 253 Fall 2014.
+A minimalistic URL shortener with basic tracking analytics.
